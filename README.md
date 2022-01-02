@@ -1,5 +1,7 @@
 # happi-heyday
 
+Production: https://heydayle.github.io/Congratulatory-letter/#/
+
 ## Project setup
 ```
 yarn install
@@ -19,6 +21,3 @@ yarn build
 ```
 yarn lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
