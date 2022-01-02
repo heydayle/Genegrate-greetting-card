@@ -1,20 +1,35 @@
 <template>
-  <div class="tw-text-5xl tw-font-light tw-text-white tw-text-center">
-    <div v-if="isComing" class="tw-duration-500 tw-animate-fadeInTop100">
-      To day <span class="tw-font-bold">{{ getDay + "/" + getMonth + "/" + getYear }}</span> is a special day!
+  <div
+    class="tw-text-2xl xl:tw-text-5xl tw-font-light tw-text-white tw-text-justify xl:tw-text-center"
+  >
+    <div
+      v-if="isComing"
+      class="tw-duration-500 tw-animate-fadeInTop100 tw-text-center"
+    >
+      Today
+      <span class="tw-font-bold">{{
+        getDay + "/" + getMonth + "/" + getYear
+      }}</span>
+      is a special day!
     </div>
-    <div v-if="isReady" class="tw-duration-500 tw-animate-fadeInTop100">
-      Let's count down together
+    <div
+      v-if="isReady"
+      class="tw-duration-500 tw-animate-fadeInTop100 tw-text-center"
+    >
+      {{ intro }}
+      <div>Let's countdown together</div>
     </div>
-    <div class="tw-h-24 tw-mb-6">
+    <div class="tw-h-18 xl:w-h-24 tw-mb-0 sm:tw-mb-6 tw-text-center">
       <div v-if="year === getYearBirtday" class="tw-animate-fadeInTop100">
-          <div class="tw-font-bold">{{type}}</div>
-        <div class="tw-font-light tw-mt-2">{{ name }}</div>
+        <div class="sm:tw-text-lg xl:tw-text-5xl tw-font-bold">{{ type }}</div>
+        <div class="sm:tw-text-lg xl:tw-text-5xl tw-font-light xl:tw-mt-2">
+          {{ name }}
+        </div>
       </div>
     </div>
     <div
       v-if="!isCountdown && !isComing && !isReady"
-      class="tw-duration-1000 tw-animate-fadeInTop100"
+      class="tw-duration-1000 tw-animate-fadeInTop100 tw-text-center"
     >
       <span class="tw-duration-300 tw-animate-fadeInTop100">{{ getDay }}</span
       >/
@@ -22,20 +37,26 @@
       >/
       <span class="tw-duration-500 tw-animate-bounceIn">{{ getYear }}</span>
     </div>
-    
-    <div v-if="isCountdown">
-      <span>{{ day }}</span>/
-      <span>{{ month }}</span>/
+
+    <div v-if="isCountdown" class="tw-text-center">
+      <span>{{ day }}</span
+      >/ <span>{{ month }}</span
+      >/
       <span>{{ year }}</span>
     </div>
     <div class="tw-h-10 tw-mt-2">
       <div v-if="year === getYearBirtday" class="tw-animate-fadeInTop100">
         <div
           v-if="isWish"
-          class="tw-animate-fadeInTop100 tw-text-xl tw-font-semibold"
+          class="tw-animate-fadeInTop tw-text-xl tw-font-semibold"
         >
-          <div class="tw-font-light">"{{wish}}"</div>
-          <div>by <span class="tw-italic">{{credit}}</span></div>
+          <div class="wish-text tw-pr-2 tw-font-light tw-overflow-auto">
+            "{{ wish }}"
+          </div>
+          <div class="tw-mt-2 tw-text-right xl:tw-text-center">
+            by
+            <span class="tw-italic">{{ credit }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -60,6 +81,10 @@ export default {
     };
   },
   props: {
+    intro: {
+      type: String,
+      default: "",
+    },
     date: {
       type: String,
       default: "",
@@ -83,7 +108,7 @@ export default {
     type: {
       type: String,
       default: "",
-    }
+    },
   },
   computed: {
     getYear() {
@@ -108,7 +133,7 @@ export default {
   },
   methods: {
     clear() {
-        this.$emit('setClear')
+      this.$emit("setClear");
     },
     fetchDate() {
       this.isComing = true;
@@ -170,3 +195,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.wish-text {
+  max-height: 60vh;
+}
+</style>

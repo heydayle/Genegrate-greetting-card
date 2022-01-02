@@ -1,6 +1,8 @@
 export const backgrounds = [
-  { label: "Red", value: "tw-bg-red-300" },
-  { label: "Green", value: "tw-bg-green-300" },
-  { label: "Blue", value: "tw-bg-blue-300" },
-  { label: "Yellow", value: "tw-bg-yellow-300" },
+  { label: "Red", value: "#e53e3e" },
+  { label: "Pink", value: "#feb2b2" },
+  { label: "Green", value: "#1fAc7a" },
+  { label: "Blue", value: "#5CB8B2" },
+  { label: "Yellow", value: "#f0de6d" },
+  { label: "Steel", value: "#25698c" },
 ];
