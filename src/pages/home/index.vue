@@ -195,16 +195,8 @@ export default {
   created() {
     this.setFromQuery();
   },
-  watch: {
-    "$route.fullPath"() {
-      this.isReadyStart = true;
-      this.copyURL();
-      console.log(this.$route);
-    },
-  },
   mounted() {
     this.currentUrl = window.location.hostname;
-    console.log(this.currentUrl);
   },
   methods: {
     ready() {
@@ -257,8 +249,7 @@ export default {
     },
     copyURL() {
       const el = document.createElement("textarea");
-      el.value =
-        "https://" + window.location.hostname + "/#" + this.$route.fullPath;
+      el.value = window.location.href;
       el.setAttribute("readonly", "");
       el.style.position = "absolute";
       el.style.left = "-9999px";
@@ -274,7 +265,6 @@ export default {
         document.getSelection().removeAllRanges();
         document.getSelection().addRange(selected);
       }
-      alert("Copied URL");
     },
   },
 };
