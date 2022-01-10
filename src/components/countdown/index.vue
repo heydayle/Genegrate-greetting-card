@@ -19,7 +19,7 @@
       {{ intro }}
       <div>Let's countdown together</div>
     </div>
-    <div class="tw-h-18 xl:w-h-24 tw-mb-0 sm:tw-mb-6 tw-text-center">
+    <div class="tw-h-24 tw-mb-0 xl:tw-mb-6 tw-text-center">
       <div v-if="year === getYearBirtday" class="tw-animate-fadeInTop100">
         <div class="sm:tw-text-lg xl:tw-text-5xl tw-font-bold">{{ type }}</div>
         <div class="sm:tw-text-lg xl:tw-text-5xl tw-font-light xl:tw-mt-2">

@@ -146,6 +146,8 @@ export default {
       intro: "Welcome to the playground",
 
       backgrounds,
+      query: "",
+      currentUrl: "",
 
       isReadyStart: false,
       isCountdown: false,
@@ -190,9 +192,34 @@ export default {
     ButtonStart,
     Countdown,
   },
+  created() {
+    this.setFromQuery();
+  },
+  watch: {
+    "$route.fullPath"() {
+      this.isReadyStart = true;
+      this.copyURL();
+      console.log(this.$route);
+    },
+  },
+  mounted() {
+    this.currentUrl = window.location.hostname;
+    console.log(this.currentUrl);
+  },
   methods: {
     ready() {
       this.isReadyStart = true;
+      this.query = {
+        name: this.name,
+        date: this.date,
+        birthday: this.birthday,
+        credit: this.credit,
+        wish: this.wish,
+        backgroundValue: this.backgroundValue.value,
+        type: this.type,
+        intro: this.intro,
+      };
+      this.$router.push({ path: "/", query: this.query });
     },
     start() {
       this.isReadyStart = false;
@@ -204,6 +231,50 @@ export default {
     clear() {
       this.isCountdown = false;
       this.isBack = false;
+    },
+    setFromQuery() {
+      if (
+        this.$route.query.name &&
+        this.$route.query.date &&
+        this.$route.query.birthday &&
+        this.$route.query.credit &&
+        this.$route.query.wish &&
+        this.$route.query.backgroundValue &&
+        this.$route.query.type &&
+        this.$route.query.intro
+      ) {
+        this.name = this.$route.query.name;
+        this.date = this.$route.query.date;
+        this.birthday = this.$route.query.birthday;
+        this.credit = this.$route.query.credit;
+        this.wish = this.$route.query.wish;
+        this.backgroundValue.value = this.$route.query.backgroundValue;
+        this.type = this.$route.query.type;
+        this.intro = this.$route.query.intro;
+        this.isReadyStart = true;
+        this.copyURL();
+      }
+    },
+    copyURL() {
+      const el = document.createElement("textarea");
+      el.value =
+        "https://" + window.location.hostname + "/#" + this.$route.fullPath;
+      el.setAttribute("readonly", "");
+      el.style.position = "absolute";
+      el.style.left = "-9999px";
+      document.body.appendChild(el);
+      const selected =
+        document.getSelection().rangeCount > 0
+          ? document.getSelection().getRangeAt(0)
+          : false;
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      if (selected) {
+        document.getSelection().removeAllRanges();
+        document.getSelection().addRange(selected);
+      }
+      alert("Copied URL");
     },
   },
 };
