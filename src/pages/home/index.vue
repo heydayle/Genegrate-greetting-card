@@ -152,6 +152,7 @@ export default {
       isReadyStart: false,
       isCountdown: false,
       isBack: false,
+      isCopy: false,
 
       rules: {
         wish: (len) => (v) =>
@@ -201,6 +202,7 @@ export default {
   methods: {
     ready() {
       this.isReadyStart = true;
+      this.isCopy = true;
       this.query = {
         name: this.name,
         date: this.date,
@@ -211,7 +213,10 @@ export default {
         type: this.type,
         intro: this.intro,
       };
-      this.$router.push({ path: "/", query: this.query });
+      this.$router.replace({
+        path: "/",
+        query: this.query,
+      });
     },
     start() {
       this.isReadyStart = false;
